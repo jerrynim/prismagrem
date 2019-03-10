@@ -6,8 +6,6 @@ src/.env
 
 yarn.lock
 
-prisma.yml
-
 generated
 
-datamodel.prisma
+yarn-error.log

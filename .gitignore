@@ -1,0 +1,13 @@
+node_modules
+
+yarn.lock
+
+src/.env
+
+yarn.lock
+
+prisma.yml
+
+generated
+
+datamodel.prisma

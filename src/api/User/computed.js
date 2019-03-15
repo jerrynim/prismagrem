@@ -7,7 +7,7 @@ export default {
     },
     isFollowing: async (parent, _, { request }) => {
       const { user } = request;
-      const { id: parent } = parent;
+      const { id: parentId } = parent;
       try {
         return prisma.$exists.user({
           AND: [

@@ -11,7 +11,7 @@ export default {
         .comments()
         .$fragment(COMMENT_FRAGMENT);
       const likeCount = await prisma
-        .likesConnection({ where: { post: id } })
+        .likesConnection({ where: { post: { id } } })
         .aggregate()
         .count();
       return {

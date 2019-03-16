@@ -1,9 +1,0 @@
-type FullPost {
-  post: Post!
-  comments: [Comment!]!
-  likeCount: Int!
-}
-
-type Query {
-  seeFullPost(id: String!): FullPost!
-}

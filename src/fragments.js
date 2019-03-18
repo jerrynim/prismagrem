@@ -1,6 +1,7 @@
 export const USER_FRAGMENT = `
     id
     username
+    avatar
 `;
 
 export const COMMENT_FRAGMENT = `
@@ -29,6 +30,29 @@ export const FULL_POST_FRAGMENT = `
         }
         user {
             ${USER_FRAGMENT}
+        }
+    }
+`;
+
+export const MESSAGE_FRAGMENT = `
+    id
+    text
+    to{
+        ${USER_FRAGMENT}
+    }
+    from{
+        ${USER_FRAGMENT}
+    }
+`;
+
+export const ROOM_FRAGMENT = `
+    fragment PostParts on Room{
+        id
+        participants{
+        ${USER_FRAGMENT}
+        }
+        messages{
+            ${MESSAGE_FRAGMENT}
         }
     }
 `;

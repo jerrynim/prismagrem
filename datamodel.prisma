@@ -5,12 +5,11 @@ type User {
   email: String! @unique
   firstName: String @default(value: "")
   lastName: String
-  fullName: String
-  isFollowing: Boolean!
-  isSelf: Boolean!
   bio: String
   following: [User!]! @relation(name: "FollowRelation")
   followers: [User!]! @relation(name: "FollowRelation")
+  followingCount: Int
+  followersCount: Int
   posts: [Post!]! @relation(name: "PostsOfUser", onDelete: CASCADE)
   likes: [Like!]! @relation(name: "LikesOfUser", onDelete: CASCADE)
   comments: [Comment!]! @relation(name: "CommentsOfUser", onDelete: CASCADE)
@@ -26,7 +25,6 @@ type Post {
   files: [File!]! @relation(name: "FilesOfPost", onDelete: CASCADE)
   likes: [Like!]! @relation(name: "LikeOfPost", onDelete: CASCADE)
   comments: [Comment!]! @relation(name: "CommentOfPost", onDelete: CASCADE)
-  isLiked: Boolean
 }
 
 type Like {

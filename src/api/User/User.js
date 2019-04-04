@@ -37,7 +37,7 @@ export default {
             }
           ]
         });
-      } catch (error) {
+      } catch {
         return false;
       }
     },

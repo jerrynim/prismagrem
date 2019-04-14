@@ -5,6 +5,7 @@ dotenv.config({ path: path.join(__dirname, ".env") });
 import { GraphQLServer } from "graphql-yoga";
 import schema from "./schema";
 import logger from "morgan";
+import "./passport";
 import { authenticateJwt } from "./passport";
 import { isAuthenticated } from "./middlewares";
 

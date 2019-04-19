@@ -45,6 +45,11 @@ export default {
       const { user } = request;
       const { id: parentId } = parent;
       return user.id === parentId;
-    }
+    },
+    postsCount: ({ id }) =>
+      prisma
+        .commentsConnection({ where: { user: { id } } })
+        .aggregate()
+        .count()
   }
 };

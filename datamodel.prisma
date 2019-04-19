@@ -1,6 +1,9 @@
 type User {
   id: ID! @unique
   avatar: String
+    @default(
+      value: "https://uploads-ssl.webflow.com/5bff8886c3964a992e90d465/5c00fa0eb8b0816e1a10dfe6_hero-2.svg"
+    )
   username: String! @unique
   email: String! @unique
   firstName: String @default(value: "")

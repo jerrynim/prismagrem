@@ -1,5 +1,5 @@
 type User {
-  id: ID! @unique
+  id: ID! @id
   avatar: String
     @default(
       value: "https://uploads-ssl.webflow.com/5bff8886c3964a992e90d465/5c00fa0eb8b0816e1a10dfe6_hero-2.svg"
@@ -8,6 +8,7 @@ type User {
   email: String! @unique
   firstName: String @default(value: "")
   lastName: String
+  secret: String!
   bio: String
   following: [User!]! @relation(name: "FollowRelation")
   followers: [User!]! @relation(name: "FollowRelation")
@@ -18,61 +19,61 @@ type User {
   comments: [Comment!]! @relation(name: "CommentsOfUser", onDelete: CASCADE)
   rooms: [Room!]!
   loginSecret: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Post {
-  id: ID! @unique
+  id: ID! @id @unique
   location: String
   caption: String!
   user: User @relation(name: "PostsOfUser")
   files: [File!]! @relation(name: "FilesOfPost", onDelete: CASCADE)
   likes: [Like!]! @relation(name: "LikeOfPost", onDelete: CASCADE)
   comments: [Comment!]! @relation(name: "CommentOfPost", onDelete: CASCADE)
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Like {
-  id: ID! @unique
+  id: ID! @unique @id
   user: User @relation(name: "LikesOfUser")
   post: Post @relation(name: "LikeOfPost")
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Comment {
-  id: ID! @unique
+  id: ID! @unique @id
   text: String!
   user: User @relation(name: "CommentsOfUser")
   post: Post @relation(name: "CommentOfPost")
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type File {
-  id: ID! @unique
+  id: ID! @unique @id
   url: String!
   post: Post @relation(name: "FilesOfPost")
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Room {
-  id: ID! @unique
+  id: ID! @unique @id
   participants: [User!]!
   messages: [Message!]!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 type Message {
-  id: ID! @unique
+  id: ID! @unique @id
   text: String!
   from: User! @relation(name: "From")
   to: User! @relation(name: "To")
   room: Room!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }

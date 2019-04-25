@@ -8,6 +8,7 @@
     "@babel/core": "^7.3.4",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.3.4",
+    "bcrypt": "^3.0.6",
     "dotenv": "^6.2.0",
     "global": "^4.3.2",
     "graphql-tools": "^4.0.4",

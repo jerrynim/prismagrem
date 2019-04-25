@@ -1,4 +1,7 @@
 import { prisma } from "../../../../generated/prisma-client";
+import bcrypt from "bcrypt";
+
+const ROUNDS = 10;
 
 export default {
   Mutation: {
@@ -15,11 +18,12 @@ export default {
       if (exists) {
         throw Error("This username / email is already taken");
       }
+      const hashedSecret = await bcrypt.hash(secret, ROUNDS);
       await prisma.createUser({
         username,
         email,
         lastName: name,
-        secret
+        secret: hashedSecret
       });
       return true;
     }

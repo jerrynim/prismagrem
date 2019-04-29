@@ -7,13 +7,15 @@ export default {
     login: async (_, args) => {
       const { email, secret } = args;
       const user = await prisma.user({ email });
-      console.log(user);
-      console.log(secret);
-      const secretCheck = bcrypt.compare(secret, user.secret);
-      if (secretCheck) {
-        return generateToken(user.id);
+      if (user.loginSecret !== "") {
+        throw Error("not  Verified");
       } else {
-        throw Error("password Wrong");
+        const secretCheck = bcrypt.compare(secret, user.secret);
+        if (secretCheck) {
+          return generateToken(user.id);
+        } else {
+          throw Error("password Wrong");
+        }
       }
     }
   }

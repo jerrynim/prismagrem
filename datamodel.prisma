@@ -8,7 +8,7 @@ type User {
   email: String! @unique
   firstName: String @default(value: "")
   lastName: String
-  secret: String!
+  secret: String
   bio: String
   following: [User!]! @relation(name: "FollowRelation")
   followers: [User!]! @relation(name: "FollowRelation")

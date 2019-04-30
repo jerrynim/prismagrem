@@ -8,7 +8,7 @@ type User {
   fullName: String
   isFollowing: Boolean!
   isSelf: Boolean!
-  secret: String!
+  secret: String
   bio: String
   following: [User!]!
   followingCount: Int

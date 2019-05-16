@@ -10,6 +10,8 @@ type User {
   lastName: String
   secret: String
   bio: String
+  phoneNumber: String
+  gender: String
   following: [User!]! @relation(name: "FollowRelation")
   followers: [User!]! @relation(name: "FollowRelation")
   followingCount: Int

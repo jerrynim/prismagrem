@@ -10,7 +10,7 @@ type User {
   isSelf: Boolean!
   secret: String
   bio: String
-  gender: Gender
+  gender: String
   phoneNumber: String
   following: [User!]!
   followingCount: Int
@@ -24,11 +24,6 @@ type User {
   loginSecret: String!
   createdAt: String
   updatedAt: String
-}
-
-enum Gender {
-  MALE
-  FEMAL
 }
 
 type Post {

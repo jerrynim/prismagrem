@@ -8,8 +8,14 @@
     "@babel/core": "^7.3.4",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.3.4",
+    "apollo-server": "^2.5.0",
+    "apollo-upload-client": "^10.0.1",
+    "apollo-upload-server": "^7.1.0",
+    "aws-sdk": "^2.458.0",
     "bcrypt": "^3.0.6",
+    "cors": "^2.8.5",
     "dotenv": "^6.2.0",
+    "express-graphql": "^0.8.0",
     "global": "^4.3.2",
     "graphql-tools": "^4.0.4",
     "graphql-yoga": "^1.17.4",
@@ -22,7 +28,8 @@
     "passport-facebook": "^3.0.0",
     "passport-jwt": "^4.0.0",
     "prisma": "^1.28.1",
-    "prisma-client-lib": "^1.28.2"
+    "prisma-client-lib": "^1.28.2",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"

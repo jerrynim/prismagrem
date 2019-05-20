@@ -17,11 +17,11 @@ type User {
   followers: [User!]!
   followersCount: Int
   posts: [Post!]!
-  postsCount: Int!
+  postsCount: Int
   likes: [Like!]!
   comments: [Comment!]!
   rooms: [Room!]!
-  loginSecret: String!
+  loginSecret: String
   createdAt: String
   updatedAt: String
 }
@@ -57,6 +57,14 @@ type Comment {
   post: Post!
   createdAt: String
   updatedAt: String
+}
+
+type PhotoFile {
+  id: ID!
+  path: String!
+  filename: String!
+  mimetype: String!
+  encoding: String!
 }
 
 type File {

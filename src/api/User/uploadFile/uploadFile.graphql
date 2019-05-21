@@ -1,5 +1,5 @@
 scalar Upload
 
 type Mutation {
-  uploadFile(file: Upload!): PhotoFile!
+  uploadFile(file: Upload!): Boolean
 }

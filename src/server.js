@@ -7,23 +7,33 @@ import logger from "morgan";
 import "./passport";
 import { authenticateJwt } from "./passport";
 import { isAuthenticated } from "./middlewares";
-import graphqlHTTP from "express-graphql";
-import { apolloUploadExpress } from "apollo-upload-server";
+import { graphqlExpress } from "graphql-server-express";
 import cors from "cors";
+import bodyParser from "body-parser";
+import { apolloUploadExpress } from "apollo-upload-server";
+import upload from "./upload";
+
 const PORT = process.env.PORT || 4000;
 
 const server = new GraphQLServer({
   schema,
   context: ({ request }) => ({ request, isAuthenticated })
 });
-server.express.use(cors());
+const corsOptions = {
+  origin: "*",
+  optionsSuccessStatus: 200
+};
+
+server.express.use(cors(corsOptions));
 server.express.use(authenticateJwt);
 server.express.use(logger("dev"));
 server.express.use(
   "/graphql",
-  apolloUploadExpress({ maxFileSize: 10000000, maxFiles: 10 }),
-  graphqlHTTP({ schema })
+  bodyParser.json(),
+  apolloUploadExpress({ uploadDir: "./" }),
+  graphqlExpress({ schema })
 );
+server.express.post("/upload", upload);
 
 server.start({ port: PORT }, () =>
   console.log(`Server running on http://localhost:${PORT}`)

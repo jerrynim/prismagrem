@@ -16,6 +16,7 @@ const upload = (req, res) => {
         Bucket: "jerrynim-instagram"
       }
     });
+
     const key = uuid() + "-" + file.name;
     const stream = createReadStream(file.path);
     console.log(stream);

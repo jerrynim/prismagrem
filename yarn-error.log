@@ -1,11 +1,11 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.13.0/libexec/bin/yarn.js add raphql-server-express
+  /usr/local/bin/node /Users/lee/.npm-global/bin/yarn install
 
 PATH: 
   /Library/Frameworks/Python.framework/Versions/3.7/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/Users/lee/.npm-global/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Postgres.app/Contents/Versions/latest/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/Users/lee/.npm-global/bin
 
 Yarn version: 
-  1.13.0
+  1.16.0
 
 Node version: 
   11.10.1
@@ -14,17 +14,12 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/raphql-server-express: Not found
-      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.13.0/libexec/lib/cli.js:66255:18)
-      at Request.self.callback (/usr/local/Cellar/yarn/1.13.0/libexec/lib/cli.js:129397:22)
-      at Request.emit (events.js:197:13)
-      at Request.<anonymous> (/usr/local/Cellar/yarn/1.13.0/libexec/lib/cli.js:130369:10)
-      at Request.emit (events.js:197:13)
-      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.13.0/libexec/lib/cli.js:130291:12)
-      at Object.onceWrapper (events.js:285:13)
-      at IncomingMessage.emit (events.js:202:15)
-      at endReadableNT (_stream_readable.js:1129:12)
-      at processTicksAndRejections (internal/process/next_tick.js:76:17)
+  SyntaxError: /Users/lee/prismagrem/package.json: Unexpected token < in JSON at position 485
+      at JSON.parse (<anonymous>)
+      at /Users/lee/.npm-global/lib/node_modules/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/Users/lee/.npm-global/lib/node_modules/yarn/lib/cli.js:304:30)
+      at /Users/lee/.npm-global/lib/node_modules/yarn/lib/cli.js:315:13
 
 npm manifest: 
   {
@@ -45,7 +40,12 @@ npm manifest:
       "cors": "^2.8.5",
       "dotenv": "^6.2.0",
       "express-graphql": "^0.8.0",
+  <<<<<<< HEAD
+      "formidable": "^1.2.1",
+  =======
+  >>>>>>> 4f6c2efea9d89ea08bfd413e121d764cef96421a
       "global": "^4.3.2",
+      "graphql-server-express": "^1.4.0",
       "graphql-tools": "^4.0.4",
       "graphql-yoga": "^1.17.4",
       "jsonwebtoken": "^8.5.0",
@@ -1227,7 +1227,7 @@ Lockfile:
       graphql-tools "^4.0.0"
       type-is "^1.6.16"
   
-  apollo-server-express@^1.3.6:
+  apollo-server-express@^1.3.6, apollo-server-express@^1.4.0:
     version "1.4.0"
     resolved "https://registry.yarnpkg.com/apollo-server-express/-/apollo-server-express-1.4.0.tgz#7d7c58d6d6f9892b83fe575669093bb66738b125"
     integrity sha512-zkH00nxhLnJfO0HgnNPBTfZw8qI5ILaPZ5TecMCI9+Y9Ssr2b0bFr9pBRsXy9eudPhI+/O4yqegSUsnLdF/CPw==
@@ -2751,6 +2751,11 @@ Lockfile:
       combined-stream "^1.0.6"
       mime-types "^2.1.12"
   
+  formidable@^1.2.1:
+    version "1.2.1"
+    resolved "https://registry.yarnpkg.com/formidable/-/formidable-1.2.1.tgz#70fb7ca0290ee6ff961090415f4b3df3d2082659"
+    integrity sha512-Fs9VRguL0gqGHkXS5GQiMCr1VhZBxz0JnJs4JmMp/2jL18Fmbzvv7vOFRU+U8TBkHEE/CX1qDXzJplVULgsLeg==
+  
   forwarded@~0.1.2:
     version "0.1.2"
     resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.1.2.tgz#98c23dab1175657b8c0573e8ceccd91b0ff18c84"
@@ -3023,6 +3028,13 @@ Lockfile:
     integrity sha512-dDX2M+VMsxXFCmUX0Vo0TopIZIX4ggzOtiCsThgtrKR4niiaagsGTDIHj3fsOMFETpa064vzovI+4YV4QnMbcg==
     dependencies:
       cross-fetch "2.2.2"
+  
+  graphql-server-express@^1.4.0:
+    version "1.4.0"
+    resolved "https://registry.yarnpkg.com/graphql-server-express/-/graphql-server-express-1.4.0.tgz#f62b49dc70c860b653e76e21defa7f27324b764d"
+    integrity sha512-KdFI03IhogEDmH0QMUeG8lpGe+yR+M+9HDNAiHrkt8QD/1PbHDqlYxZ5hY/mR9Mzk4O3bRcsRkYIm+UrvX4HMA==
+    dependencies:
+      apollo-server-express "^1.4.0"
   
   graphql-subscriptions@^0.5.8:
     version "0.5.8"

@@ -4,7 +4,6 @@ import uuid from "uuid/v1";
 import { createReadStream } from "fs";
 const upload = (req, res) => {
   let form = new IncomingForm();
-
   form.on("file", async (field, file) => {
     // Do something with the file
     // e.g. save it to the database
@@ -19,7 +18,6 @@ const upload = (req, res) => {
 
     const key = uuid() + "-" + file.name;
     const stream = createReadStream(file.path);
-    console.log(stream);
     // Upload to S3
     const response = await s3
       .upload({
@@ -31,11 +29,9 @@ const upload = (req, res) => {
       .catch();
 
     const url = response.Location;
-    console.log(url);
+    res.json(url);
   });
-  form.on("end", () => {
-    res.json();
-  });
+  form.on("end", () => {});
   form.parse(req);
 };
 export default upload;

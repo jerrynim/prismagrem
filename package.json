@@ -16,7 +16,10 @@
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "express-graphql": "^0.8.0",
+<<<<<<< HEAD
     "formidable": "^1.2.1",
+=======
+>>>>>>> 4f6c2efea9d89ea08bfd413e121d764cef96421a
     "global": "^4.3.2",
     "graphql-server-express": "^1.4.0",
     "graphql-tools": "^4.0.4",

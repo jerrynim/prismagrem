@@ -1,5 +1,0 @@
-scalar Upload
-
-type Mutation {
-  uploadFile(file: Upload!): Boolean
-}

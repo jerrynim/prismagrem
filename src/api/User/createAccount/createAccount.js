@@ -18,7 +18,10 @@ export default {
       if (exists) {
         throw Error("This username / email is already taken");
       }
-      const hashedSecret = await bcrypt.hash(secret, ROUNDS);
+      const hashedSecret = await bcrypt.hash(
+        secret,
+        parseInt(process.env.BYCRIPT_ROUNDS)
+      );
       await prisma.createUser({
         username,
         email,

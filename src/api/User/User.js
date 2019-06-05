@@ -48,7 +48,7 @@ export default {
     },
     postsCount: ({ id }) =>
       prisma
-        .postsConnection({ where: { user: { id } } })
+        .commentsConnection({ where: { user: { id } } })
         .aggregate()
         .count()
   }

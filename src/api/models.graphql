@@ -28,7 +28,6 @@ type User {
 
 type Post {
   id: ID!
-  postId: String
   location: String
   caption: String!
   user: User!

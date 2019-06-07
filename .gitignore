@@ -9,3 +9,9 @@ yarn.lock
 generated
 
 yarn-error.log
+
+up.json
+
+/out
+
+serverless.yml

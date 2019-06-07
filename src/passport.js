@@ -2,7 +2,6 @@ import "./env";
 import { prisma } from "../generated/prisma-client";
 import passport from "passport";
 import { Strategy, ExtractJwt } from "passport-jwt";
-import FacebookStrategy from "passport-facebook";
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: process.env.JWT_SECRET
@@ -22,13 +21,15 @@ const verifyUser = async (payload, done) => {
   }
 };
 
-export const authenticateJwt = (req, res, next) =>
+export const authenticateJwt = (req, res, next) => {
+  console.log(req);
   passport.authenticate("jwt", { session: false }, (error, user) => {
     if (user) {
       req.user = user;
     }
     next();
   })(req, res, next);
+};
 
 passport.use(new Strategy(jwtOptions, verifyUser));
 passport.initialize();

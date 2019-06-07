@@ -1,0 +1,131 @@
+type Mutation {
+  addComment(postId: String!, text: String!): Comment!
+  toggleLike(postId: String!): Boolean!
+  sendMessage(roomId: String, message: String!, toId: String): Message
+  editPost(id: String!, catption: String!, location: String!, action: ACTOIONS): Post!
+  upload(caption: String!, files: [String!]!): Post!
+  changePassword(currentPs: String, newPs: String): Boolean
+  confirmSecret(secret: String!, email: String!): String!
+  createAccount(username: String!, name: String!, email: String!, secret: String!): Boolean!
+  editUser(username: String, email: String, lastName: String, bio: String, gender: String, phoneNumber: String): User!
+  facebookLogin(email: String!, firstName: String!, lastName: String!, name: String!): String!
+  follow(id: String!): Boolean
+  login(email: String!, secret: String!): String!
+  requestSecret(email: String!): Boolean!
+  unfollow(id: String!): Boolean!
+}
+
+type Subscription {
+  newMessage(roomId: String!): Message
+}
+
+type User {
+  id: ID!
+  avatar: String
+  username: String!
+  email: String!
+  firstName: String
+  lastName: String
+  fullName: String
+  isFollowing: Boolean!
+  isSelf: Boolean!
+  secret: String
+  bio: String
+  gender: String
+  phoneNumber: String
+  following: [User!]!
+  followingCount: Int
+  followers: [User!]!
+  followersCount: Int
+  posts: [Post!]!
+  postsCount: Int
+  likes: [Like!]!
+  comments: [Comment!]!
+  rooms: [Room!]!
+  loginSecret: String
+  createdAt: String
+  updatedAt: String
+}
+
+type Post {
+  id: ID!
+  location: String
+  caption: String!
+  user: User!
+  files: [File!]!
+  likes: [Like!]!
+  comments: [Comment!]!
+  commentCount: Int!
+  isLiked: Boolean!
+  likeCount: Int!
+  createdAt: String
+  updatedAt: String
+}
+
+type Like {
+  id: ID!
+  user: User!
+  post: Post!
+  createdAt: String
+  updatedAt: String
+}
+
+type Comment {
+  id: ID!
+  text: String!
+  user: User!
+  post: Post!
+  createdAt: String
+  updatedAt: String
+}
+
+type PhotoFile {
+  id: ID!
+  path: String!
+  filename: String!
+  mimetype: String!
+  encoding: String!
+}
+
+type File {
+  id: ID!
+  url: String!
+  post: Post!
+  createdAt: String
+  updatedAt: String
+}
+
+type Room {
+  id: ID!
+  participants: [User!]!
+  messages: [Message!]!
+  createdAt: String
+  updatedAt: String
+}
+
+type Message {
+  id: ID!
+  text: String!
+  from: User!
+  to: User!
+  room: Room!
+  createdAt: String
+  updatedAt: String
+}
+
+enum ACTOIONS {
+  EDIT
+  DELETE
+}
+
+type Query {
+  searchPost(term: String!): [Post!]!
+  seeFeed: [Post!]!
+  seeFullPost(id: String!): Post!
+  seeRoom(id: String!): Room!
+  seeRooms: [Room!]!
+  getUsers: [User!]!
+  me: User!
+  searchUser(term: String!): [User!]!
+  seeUser(username: String!): User!
+}

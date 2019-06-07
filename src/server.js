@@ -1,40 +1,45 @@
 import dotenv from "dotenv";
-import path from "path";
 dotenv.config({ path: path.join(__dirname, ".env") });
-import { GraphQLServer } from "graphql-yoga";
-import schema from "./schema";
-import logger from "morgan";
-import "./passport";
-import { authenticateJwt } from "./passport";
-import { isAuthenticated } from "./middlewares";
-import { graphqlExpress } from "graphql-server-express";
-import cors from "cors";
-import bodyParser from "body-parser";
-import { apolloUploadExpress } from "apollo-upload-server";
-import upload from "./upload";
+import { GraphQLServerLambda } from "graphql-yoga";
+import express from "express";
+import path from "path";
+import jwt from "jsonwebtoken";
+import serverless from "serverless-http";
+import { fileLoader, mergeResolvers } from "merge-graphql-schemas";
+import middlewares from "./middlewares";
+import { prisma } from "../generated/prisma-client";
+const allResolvers = fileLoader(path.join(__dirname, "/api/**/*.js"));
 
-const PORT = process.env.PORT || 4000;
-
-const server = new GraphQLServer({
-  schema,
-  context: ({ request }) => ({ request, isAuthenticated })
+const lambda = new GraphQLServerLambda({
+  typeDefs: "./src/schema.graphql",
+  resolvers: mergeResolvers(allResolvers),
+  middlewares: middlewares,
+  context: async (req) => {
+    const token = req.event.headers;
+    if (token) {
+      if (token) {
+        //프리스마 에서 유저를 찾아 req에 넣는다
+        try {
+          console.log(token, process.env.JWT_SECRET);
+          // const id = jwt.verify(token, process.env.JWT_SECRET || "");
+          // console.log(id);
+        } catch (e) {
+          console.log(e.message);
+        }
+        return { ...req, user };
+      } else {
+        return { ...req };
+      }
+    }
+  }
 });
-const corsOptions = {
-  origin: "*",
-  optionsSuccessStatus: 200
-};
 
-server.express.use(cors(corsOptions));
-server.express.use(authenticateJwt);
-server.express.use(logger("dev"));
-server.express.use(
-  "/graphql",
-  bodyParser.json(),
-  apolloUploadExpress({ uploadDir: "./" }),
-  graphqlExpress({ schema })
-);
-server.express.post("/upload", upload);
+const app = express();
 
-server.start({ port: PORT }, () =>
-  console.log(`Server running on http://localhost:${PORT}`)
-);
+app.get("/image", function(req, res) {
+  res.send("Hello World!");
+});
+
+module.exports.handler = serverless(app);
+export const server = lambda.graphqlHandler;
+export const playground = lambda.playgroundHandler;

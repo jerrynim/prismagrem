@@ -2,7 +2,7 @@ type User {
   id: ID! @id
   avatar: String
     @default(
-      value: "https://uploads-ssl.webflow.com/5bff8886c3964a992e90d465/5c00fa0eb8b0816e1a10dfe6_hero-2.svg"
+      value: "https://jerrynim-instagram.s3.ap-northeast-2.amazonaws.com/8050ec00-8522-11e9-b256-2b02ece2210a-Avatar.png"
     )
   username: String! @unique
   email: String! @unique

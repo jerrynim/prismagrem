@@ -6,7 +6,6 @@ export default {
     facebookLogin: async (_, args) => {
       const { email, firstName, lastName, name } = args;
       const existUser = await prisma.user({ email });
-      console.log(existUser);
       if (existUser) {
         //로그인 토큰을발행
         const token = generateToken(existUser.id);
@@ -19,7 +18,6 @@ export default {
           lastName,
           username: name
         });
-        console.log(newUser);
         const token = generateToken(newUser.id);
         return token;
       }

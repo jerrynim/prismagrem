@@ -1,5 +1,5 @@
 type User {
-  id: ID! @id
+  id: ID! @id @unique
   avatar: String
     @default(
       value: "https://jerrynim-instagram.s3.ap-northeast-2.amazonaws.com/8050ec00-8522-11e9-b256-2b02ece2210a-Avatar.png"

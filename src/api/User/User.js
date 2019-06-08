@@ -2,6 +2,7 @@ import { prisma } from "../../../generated/prisma-client";
 
 export default {
   User: {
+    userId: ({ id }) => id,
     posts: ({ id }) => prisma.user({ id }).posts(),
     following: ({ id }) => prisma.user({ id }).following(),
     followers: ({ id }) => prisma.user({ id }).followers(),
@@ -48,7 +49,7 @@ export default {
     },
     postsCount: ({ id }) =>
       prisma
-        .commentsConnection({ where: { user: { id } } })
+        .postsConnection({ where: { user: { id } } })
         .aggregate()
         .count()
   }

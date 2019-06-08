@@ -1,10 +1,7 @@
 import { prisma } from "../../../../generated/prisma-client";
-import { isAuthenticated } from "../../../middlewares";
-
 export default {
   Mutation: {
-    toggleLike: async (_, args, { request }) => {
-      isAuthenticated(request);
+    toggleLike: async (_, args, request) => {
       const { postId } = args;
       const { user } = request;
       const filterOptions = {
@@ -41,7 +38,7 @@ export default {
         }
         return true;
       } catch (error) {
-        console.log(error);
+        throw Error(error.message);
         return false;
       }
     }

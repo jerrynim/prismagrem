@@ -4,7 +4,7 @@ type Mutation {
   sendMessage(roomId: String, message: String!, toId: String): Message
   editPost(id: String!, catption: String!, location: String!, action: ACTOIONS): Post!
   upload(caption: String!, files: [String!]!): Post!
-  changePassword(currentPs: String, newPs: String): String
+  changePassword(currentPs: String, newPs: String): Boolean
   confirmSecret(secret: String!, email: String!): String!
   createAccount(username: String!, name: String!, email: String!, secret: String!): Boolean!
   editUser(username: String, email: String, lastName: String, bio: String, gender: String, phoneNumber: String): User!
@@ -21,7 +21,6 @@ type Subscription {
 
 type User {
   id: ID!
-  userId: String
   avatar: String
   username: String!
   email: String!
@@ -50,7 +49,6 @@ type User {
 
 type Post {
   id: ID!
-  postId: String
   location: String
   caption: String!
   user: User!
@@ -121,7 +119,6 @@ enum ACTOIONS {
 }
 
 type Query {
-  getPosts: [Post!]!
   searchPost(term: String!): [Post!]!
   seeFeed: [Post!]!
   seeFullPost(id: String!): Post!

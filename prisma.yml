@@ -1,4 +1,4 @@
-endpoint: http://farga-Publi-8RKSGLKPYKX5-1168239189.us-west-2.elb.amazonaws.com/prismagramAWS/dev
+endpoint: https://us1.prisma.sh/leechang/prismagrem/dev
 datamodel: datamodel.prisma
 
 generate:

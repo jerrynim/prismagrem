@@ -11,7 +11,8 @@ export default {
         await prisma.updateUser({ data: { loginSecret }, where: { email } });
         return true;
       } catch (e) {
-        throw Error(e.message);
+        console.log(e);
+        return false;
       }
     }
   }

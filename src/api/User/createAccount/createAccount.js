@@ -1,5 +1,7 @@
 import { prisma } from "../../../../generated/prisma-client";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
+
+const ROUNDS = 10;
 
 export default {
   Mutation: {
@@ -15,23 +17,18 @@ export default {
       });
       if (exists) {
         throw Error("This username / email is already taken");
-      } else {
-        bcrypt.genSalt(parseInt(process.env.BYCRIPT_ROUNDS), function(
-          err,
-          salt
-        ) {
-          bcrypt.hash(secret, salt, async (err, hash) => {
-            // Store hash in your password DB.
-            await prisma.createUser({
-              username,
-              email,
-              lastName: name,
-              secret: hash
-            });
-          });
-        });
-        return true;
       }
+      const hashedSecret = await bcrypt.hash(
+        secret,
+        parseInt(process.env.BYCRIPT_ROUNDS)
+      );
+      await prisma.createUser({
+        username,
+        email,
+        lastName: name,
+        secret: hashedSecret
+      });
+      return true;
     }
   }
 };

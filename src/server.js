@@ -14,19 +14,22 @@ const lambda = new GraphQLServerLambda({
   typeDefs: "./src/schema.graphql",
   resolvers: mergeResolvers(allResolvers),
   middlewares: middlewares,
-  context: async (request) => {
-    //프리스마 에서 유저를 찾아 request 넣는다
-    try {
-      const token = request.event.headers;
+  context: async (req) => {
+    const token = req.event.headers;
+    if (token) {
       if (token) {
-        const { id } = jwt.verify(token.Authorization, process.env.JWT_SECRET);
-        const user = await prisma.user({ id });
-        return { ...request, user };
+        //프리스마 에서 유저를 찾아 req에 넣는다
+        try {
+          console.log(token, process.env.JWT_SECRET);
+          // const id = jwt.verify(token, process.env.JWT_SECRET || "");
+          // console.log(id);
+        } catch (e) {
+          console.log(e.message);
+        }
+        return { ...req, user };
       } else {
-        return { ...request };
+        return { ...req };
       }
-    } catch (e) {
-      throw Error(e.message);
     }
   }
 });

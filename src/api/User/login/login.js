@@ -1,4 +1,4 @@
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import { generateToken } from "../../../utils";
 import { prisma } from "../../../../generated/prisma-client";
 
@@ -10,11 +10,11 @@ export default {
       if (user.loginSecret !== "") {
         throw Error("not  Verified");
       } else {
-        const result = bcrypt.compareSync(secret, user.secret);
-        if (result) {
+        const secretCheck = bcrypt.compare(secret, user.secret);
+        if (secretCheck) {
           return generateToken(user.id);
         } else {
-          throw Error("wrong password");
+          throw Error("password Wrong");
         }
       }
     }

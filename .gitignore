@@ -15,3 +15,5 @@ up.json
 /out
 
 serverless.yml
+build
+/build

@@ -14,6 +14,7 @@ const lambda = new GraphQLServerLambda({
   typeDefs: "./src/schema.graphql",
   resolvers: mergeResolvers(allResolvers),
   middlewares: middlewares,
+<<<<<<< HEAD
   context: async (req) => {
     const token = req.event.headers;
     if (token) {
@@ -30,6 +31,21 @@ const lambda = new GraphQLServerLambda({
       } else {
         return { ...req };
       }
+=======
+  context: async (request) => {
+    //프리스마 에서 유저를 찾아 request 넣는다
+    try {
+      const token = request.event.headers;
+      if (token) {
+        const { id } = jwt.verify(token.Authorization, process.env.JWT_SECRET);
+        const user = await prisma.user({ id });
+        return { ...request, user };
+      } else {
+        return { ...request };
+      }
+    } catch (e) {
+      throw Error(e.message);
+>>>>>>> parent of 6802d2b... deployed serverless
     }
   }
 });

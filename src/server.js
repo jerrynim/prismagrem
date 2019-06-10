@@ -1,16 +1,11 @@
 import dotenv from "dotenv";
 dotenv.config({ path: path.join(__dirname, ".env") });
 import { GraphQLServerLambda } from "graphql-yoga";
-import express from "express";
 import path from "path";
 import jwt from "jsonwebtoken";
-import serverless from "serverless-http";
 import middlewares from "./middlewares";
 import { prisma } from "../generated/prisma-client";
-import cors from "cors";
-import bodyParser from "body-parser";
 import schema from "./schema";
-import upload from "./upload";
 const lambda = new GraphQLServerLambda({
   schema,
   middlewares: middlewares,
@@ -27,11 +22,5 @@ const lambda = new GraphQLServerLambda({
   }
 });
 
-const app = express();
-app.use(cors());
-app.use(bodyParser());
-app.post("/upload", upload);
-
-module.exports.handler = serverless(app);
 export const server = lambda.graphqlHandler;
 export const playground = lambda.playgroundHandler;

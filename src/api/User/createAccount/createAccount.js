@@ -18,7 +18,7 @@ export default {
       if (exists) {
         throw Error("This username / email is already taken");
       }
-      const hashedSecret = await bcrypt.hash(
+      const hashedSecret = await bcrypt.hashSync(
         secret,
         parseInt(process.env.BYCRIPT_ROUNDS)
       );

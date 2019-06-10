@@ -17,3 +17,5 @@ build/.env
 serverless.yml
 build
 /build
+prisma.yml
+nodemont.json

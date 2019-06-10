@@ -17,7 +17,6 @@ const lambda = new GraphQLServerLambda({
   context: async (request) => {
     //프리스마 에서 유저를 찾아 request 넣는다
     const token = request.event.headers.Authorization;
-    console.log(token);
     if (token === undefined || token === "null") {
       return { ...request };
     } else {

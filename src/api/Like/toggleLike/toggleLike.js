@@ -40,8 +40,7 @@ export default {
         }
         return true;
       } catch (error) {
-        console.log(error);
-        return false;
+        throw Error(error.message);
       }
     }
   }

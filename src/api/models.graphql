@@ -1,5 +1,6 @@
 type User {
   id: ID!
+  userId:String
   avatar: String
   username: String!
   email: String!
@@ -28,6 +29,7 @@ type User {
 
 type Post {
   id: ID!
+  postId:String
   location: String
   caption: String!
   user: User!

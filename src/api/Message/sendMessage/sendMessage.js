@@ -2,8 +2,7 @@ import { prisma } from "../../../../generated/prisma-client";
 
 export default {
   Mutation: {
-    sendMessage: async (_, args, { request, isAuthenticated }) => {
-      isAuthenticated(request);
+    sendMessage: async (_, args, request) => {
       const { user } = request;
       const { roomId, message, toId } = args;
       let room;

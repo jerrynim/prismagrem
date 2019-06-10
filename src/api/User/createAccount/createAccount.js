@@ -1,5 +1,5 @@
 import { prisma } from "../../../../generated/prisma-client";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 const ROUNDS = 10;
 

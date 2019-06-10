@@ -8,5 +8,5 @@ gulp.task("babel", function() {
     .pipe(sourcemaps.init())
     .pipe(babel())
     .pipe(sourcemaps.write("./", { sourceRoot: "../src" }))
-    .pipe(gulp.dest("out")); //out에 저장
+    .pipe(gulp.dest("build")); //out에 저장
 });

@@ -11,7 +11,7 @@ generated
 yarn-error.log
 
 up.json
-
+build/.env
 /out
 
 serverless.yml

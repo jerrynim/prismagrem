@@ -1,14 +1,13 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { prisma } from "../../../../generated/prisma-client";
 
 export default {
   Mutation: {
-    changePassword: async (_, args, { request, isAuthenticated }) => {
-      isAuthenticated(request);
+    changePassword: async (_, args, request) => {
       const { user } = request;
       const { currentPs, newPs } = args;
       const promiseSecret = new Promise((resolve, reject) => {
-        const secretCheck = bcrypt.compare(currentPs, user.secret);
+        const secretCheck = bcrypt.compareSync(currentPs, user.secret);
         resolve(secretCheck);
       });
       const result = promiseSecret.then((secretCheck) => {
@@ -22,15 +21,6 @@ export default {
             );
             resolve(hashedSecret);
           });
-<<<<<<< HEAD
-          promiseNewSecret.then(async (secret) => {
-            await prisma.updateUser({
-              where: { id: user.id },
-              data: {
-                secret
-              }
-            });
-=======
           const result = promisePrevSecret.then(async (result) => {
             if (await result) {
               //이전비밀번호와 일치한다면
@@ -50,7 +40,6 @@ export default {
               });
               return "비밀번호가 변경되었습니다.";
             }
->>>>>>> parent of 6802d2b... deployed serverless
           });
 
           return secretCheck;

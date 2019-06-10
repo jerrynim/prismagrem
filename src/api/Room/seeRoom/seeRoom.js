@@ -2,8 +2,7 @@ import { prisma } from "../../../../generated/prisma-client";
 
 export default {
   Query: {
-    seeRoom: async (_, args, { request, isAuthenticated }) => {
-      isAuthenticated(request);
+    seeRoom: async (_, args, request) => {
       const { user } = request;
       const { id } = args;
       const canSee = await prisma.$exists.room({

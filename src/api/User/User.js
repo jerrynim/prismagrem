@@ -11,7 +11,7 @@ export default {
     rooms: ({ id }) => prisma.user({ id }).rooms(),
     followingCount: ({ id }) =>
       prisma
-        .usersConnection({ where: { followers_some: { id } } })
+        .usersConnection({ where: { following_some: { id } } })
         .aggregate()
         .count(),
     followersCount: ({ id }) =>
@@ -49,7 +49,7 @@ export default {
     },
     postsCount: ({ id }) =>
       prisma
-        .commentsConnection({ where: { user: { id } } })
+        .postsConnection({ where: { user: { id } } })
         .aggregate()
         .count()
   }

@@ -1,27 +1,19 @@
-const serverless = require("serverless-http");
-const koa = require("koa"); // or any supported framework
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const upload = require("./upload");
-const Router = require("koa-router");
+import dotenv from "dotenv";
+dotenv.config({ path: path.join(__dirname, ".env") });
+import { GraphQLServerLambda } from "graphql-yoga";
+import express from "express";
+import path from "path";
+import serverless from "serverless-http";
+import cors from "cors";
+import bodyParser from "body-parser";
+import upload from "./upload";
 
-const app = new koa();
-const router = new Router();
-
-router.get("/", (ctx, next) => {
-  ctx.body = "홈";
+const app = express();
+app.use(cors());
+app.use(bodyParser());
+app.get("/image", function(req, res) {
+  res.send("Hello World!");
 });
-
-app.use(router.routes());
-app.use(router.allowedMethods());
+app.post("/upload", upload);
 
 module.exports.handler = serverless(app);
-
-// or as a promise
-const handler = serverless(app);
-module.exports.handler = async (event, context) => {
-  // you can do other things here
-  const result = await handler(event, context);
-  // and here
-  return result;
-};

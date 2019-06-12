@@ -19,3 +19,4 @@ build
 /build
 prisma.yml
 nodemont.json
+/serverlessUpload

@@ -16,7 +16,7 @@
     "express": "^4.17.1",
     "formidable": "^1.2.1",
     "gql-merge": "^0.0.6",
-    "graphql-shield": "^5.3.6",
+    "graphql-shield": "^7.3.5",
     "graphql-tools": "^4.0.4",
     "graphql-upload": "^8.0.6",
     "graphql-yoga": "^1.17.4",
